@@ -47,7 +47,7 @@ inject_into_file 'config/environments/development.rb', dev_email_text, :after =>
 
 run "bundle install"
 
-
+run "rails generate simple_form:install"
 
 # Initialize CanCan
 # ==================================================
