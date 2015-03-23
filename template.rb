@@ -57,7 +57,7 @@ run "bundle install"
 run "rails generate devise:install"
 
 run "rails generate devise User"
-
+inject_into_file 'config/routes.rb', "  root to: 'visitors#new'\n", :after => "routes.draw do\n"
 run "rake db:migrate"
 
 
