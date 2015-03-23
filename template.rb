@@ -5,22 +5,19 @@
 gem "analytics-ruby"
 # For encrypted password
 gem "bcrypt-ruby"
-gem 'foundation-rails'
-gem 'bootstrap-sass'
 
 # For authorization (https://github.com/ryanb/cancan)
 gem "cancancan"
 
 gem "devise"
 
-case ask("Choose Template Engine:", :limited_to => %w[erb haml slim])
-when "haml"
+case ask("Choose Front end framework Engine:", :limited_to => %w[bootstrap foundation])
+when "bootstrap"
   # HAML templating language (http://haml.info)
-  gem "haml-rails"
-when "slim"
+  gem 'bootstrap-sass'
+when "foundation"
   # A lightweight templating engine (http://slim-lang.com)
-  gem "slim-rails"
-when "erb"
+  gem "foundation-rails"
 end
 
 # Simple form builder (https://github.com/plataformatec/simple_form)
