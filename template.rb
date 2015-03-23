@@ -5,7 +5,7 @@
 gem "analytics-ruby"
 # For encrypted password
 gem "bcrypt-ruby"
-
+run "sed '/rails-saas/d', 'Gemfile'"
 # For authorization (https://github.com/ryanb/cancan)
 gem "cancancan"
 
