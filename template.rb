@@ -29,6 +29,10 @@ gem_group :development do
   # Rspec for tests (https://github.com/rspec/rspec-rails)
   gem "rspec-rails"
   gem "rails_layout"
+  gem 'better-errors'
+  gem 'web-console'
+  gem 'byebug'
+  gem 'rubocop', require: false
 end
 
 
@@ -47,7 +51,6 @@ inject_into_file 'config/environments/development.rb', dev_email_text, :after =>
 
 run "bundle install"
 
-run "rails generate simple_form:install"
 
 # Initialize CanCan
 # ==================================================
