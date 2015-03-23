@@ -34,16 +34,6 @@ gem_group :development do
   gem "guard-rspec"
 end
 
-gem_group :test do
-  gem "rspec-rails"
-  # Capybara for integration testing (https://github.com/jnicklas/capybara)
-  gem "capybara"
-  gem "capybara-webkit"
-  gem "launchy"
-  # FactoryGirl instead of Rails fixtures (https://github.com/thoughtbot/factory_girl)
-  gem "factory_girl_rails"
-  gem "database_cleaner"
-end
 
 gem_group :production do
   # For Rails 4 deployment on Heroku
