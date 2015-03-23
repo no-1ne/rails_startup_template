@@ -72,11 +72,11 @@ if yes?("setup bootstrap?")
   run "rails generate layout:install bootstrap3"
   run "rails generate layout:devise bootstrap3"
   run "rails generate simple_form:install --bootstrap"
-else if yes?("setup Foundation?")
+ else if yes?("setup Foundation?")
   run "rails generate layout:install foundation5"
   run "rails generate layout:devise foundation5"
   run "rails generate simple_form:install --foundation"
-end
+ end
 end
 
 
