@@ -29,7 +29,7 @@ gem_group :development do
   # Rspec for tests (https://github.com/rspec/rspec-rails)
   gem "rspec-rails"
   gem "rails_layout"
-  gem 'better-errors'
+  gem 'better_errors'
   gem 'web-console'
   gem 'byebug'
   gem 'rubocop', require: false
