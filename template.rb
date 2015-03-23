@@ -1,3 +1,39 @@
+
+def copy_from_repo(filename, opts = {})
+repo = 'https://raw.github.com/RailsApps/rails-composer/master/files/'
+repo = opts[:repo] unless opts[:repo].nil?
+if (!opts[:prefs].nil?) && (!prefs.has_value? opts[:prefs])
+return
+end
+source_filename = filename
+destination_filename = filename
+unless opts[:prefs].nil?
+if filename.include? opts[:prefs]
+destination_filename = filename.gsub(/\-#{opts[:prefs]}/, '')
+end
+end
+if (prefer :templates, 'haml') && (filename.include? 'views')
+remove_file destination_filename
+destination_filename = destination_filename.gsub(/.erb/, '.haml')
+end
+if (prefer :templates, 'slim') && (filename.include? 'views')
+remove_file destination_filename
+destination_filename = destination_filename.gsub(/.erb/, '.slim')
+end
+begin
+remove_file destination_filename
+if (prefer :templates, 'haml') && (filename.include? 'views')
+create_file destination_filename, html_to_haml(repo + source_filename)
+elsif (prefer :templates, 'slim') && (filename.include? 'views')
+create_file destination_filename, html_to_slim(repo + source_filename)
+else
+get repo + source_filename, destination_filename
+end
+rescue OpenURI::HTTPError
+say_wizard "Unable to obtain #{source_filename} from the repo #{repo}"
+end
+end
+
 # Gems
 # ==================================================
 
@@ -133,37 +169,3 @@ if yes?("Initialize GitHub repository?")
 end
 
 
-def copy_from_repo(filename, opts = {})
-repo = 'https://raw.github.com/RailsApps/rails-composer/master/files/'
-repo = opts[:repo] unless opts[:repo].nil?
-if (!opts[:prefs].nil?) && (!prefs.has_value? opts[:prefs])
-return
-end
-source_filename = filename
-destination_filename = filename
-unless opts[:prefs].nil?
-if filename.include? opts[:prefs]
-destination_filename = filename.gsub(/\-#{opts[:prefs]}/, '')
-end
-end
-if (prefer :templates, 'haml') && (filename.include? 'views')
-remove_file destination_filename
-destination_filename = destination_filename.gsub(/.erb/, '.haml')
-end
-if (prefer :templates, 'slim') && (filename.include? 'views')
-remove_file destination_filename
-destination_filename = destination_filename.gsub(/.erb/, '.slim')
-end
-begin
-remove_file destination_filename
-if (prefer :templates, 'haml') && (filename.include? 'views')
-create_file destination_filename, html_to_haml(repo + source_filename)
-elsif (prefer :templates, 'slim') && (filename.include? 'views')
-create_file destination_filename, html_to_slim(repo + source_filename)
-else
-get repo + source_filename, destination_filename
-end
-rescue OpenURI::HTTPError
-say_wizard "Unable to obtain #{source_filename} from the repo #{repo}"
-end
-end
