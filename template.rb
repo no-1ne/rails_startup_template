@@ -5,10 +5,10 @@
 gem "analytics-ruby"
 # For encrypted password
 gem "bcrypt-ruby"
-run "sed '/rails-saas/d', 'Gemfile'"
+run "sed '/sass-rails/d' 'Gemfile'"
 # For authorization (https://github.com/ryanb/cancan)
 gem "cancancan"
-
+gem "sass-rails"
 gem "devise"
 
 case ask("Choose Front end framework Engine:", :limited_to => %w[bootstrap foundation])
