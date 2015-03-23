@@ -71,13 +71,13 @@ run "rake db:migrate"
 # Note: This is 3.0.0
 # ==================================================
 if yes?("setup bootstrap?")
-  run "rails generate -f simple_form:install --bootstrap"
-  run "rails generate -f layout:install bootstrap3"
-  run "rails generate -f layout:devise bootstrap3"
+  run "rails generate  simple_form:install --bootstrap"
+  run "rails generate  layout:install bootstrap3"
+  run "rails generate  layout:devise bootstrap3"
  elsif yes?("setup Foundation?")
-  run "rails generate -f simple_form:install --foundation"
-  run "rails generate -f layout:install foundation5"
-  run "rails generate -f layout:devise foundation5"
+  run "rails generate  simple_form:install --foundation"
+  run "rails generate  layout:install foundation5"
+  run "rails generate  layout:devise foundation5"
 end
 run "rails g cancan:ability"
 
