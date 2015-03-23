@@ -35,6 +35,7 @@ end
 gem_group :production do
   # For Rails 4 deployment on Heroku
   gem "rails_12factor"
+  gem 'pg'
 end
 
     dev_email_text = <<-TEXT
