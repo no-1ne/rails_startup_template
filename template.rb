@@ -85,12 +85,12 @@ run "rails generate devise User"
 # Bootstrap: install from https://github.com/twbs/bootstrap
 # Note: This is 3.0.0
 # ==================================================
-if yes?("Download bootstrap?")
+if yes?("setup bootstrap?")
   run "rails generate layout:install bootstrap3"
   run "rails generate layout:devise bootstrap3"
 end
 
-if yes?("Download Simple Form?")
+if yes?("setup Foundation?")
   run "rails generate layout:install foundation5"
   run "rails generate layout:devise foundation5"
 end
