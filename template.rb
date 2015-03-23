@@ -29,9 +29,6 @@ gem_group :development do
   # Rspec for tests (https://github.com/rspec/rspec-rails)
   gem "rspec-rails"
   gem "rails_layout"
-
-  # Guard for automatically launching your specs when files are modified. (https://github.com/guard/guard-rspec)
-  gem "guard-rspec"
 end
 
 
@@ -41,15 +38,7 @@ gem_group :production do
 end
 
 
-# Setting up foreman to deal with environment variables and services
-# https://github.com/ddollar/foreman
-# ==================================================
-# Use Procfile for foreman
-run "echo 'web: bundle exec rails server -p $PORT' >> Procfile"
-run "echo PORT=3000 >> .env"
-run "echo '.env' >> .gitignore"
-# We need this with foreman to see log output immediately
-run "echo 'STDOUT.sync = true' >> config/environments/development.rb"
+
 run "echo 'config.action_mailer.default_url_options = { host: \'localhost\', port: 3000 }' >> config/environments/development.rb"
 
 run "bundle install"
