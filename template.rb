@@ -1,5 +1,21 @@
 # Gems
 # ==================================================
+gem 'sqlite3'
+# Use SCSS for stylesheets
+gem 'sass-rails'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier'
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails'
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer',  platforms: :ruby
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder'
 
 # Segment.io as an analytics solution (https://github.com/segmentio/analytics-ruby)
 gem "analytics-ruby"
@@ -78,6 +94,7 @@ if yes?("setup Foundation?")
   run "rails generate simple_form:install --foundation"
 end
 
+run "rake db:migrate"
 
 # Ignore rails doc files, Vim/Emacs swap files, .DS_Store, and more
 # ===================================================
