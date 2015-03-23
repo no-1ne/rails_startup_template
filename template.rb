@@ -37,9 +37,12 @@ gem_group :production do
   gem "rails_12factor"
 end
 
+    dev_email_text = <<-TEXT
+  # ActionMailer Config
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+TEXT
 
-
-run "echo 'config.action_mailer.default_url_options = { host: \'localhost\', port: 3000 }' >> config/environments/development.rb"
+inject_into_file 'config/environments/development.rb', dev_email_text, :after => "config.assets.debug = true"
 
 run "bundle install"
 
