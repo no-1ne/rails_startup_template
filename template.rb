@@ -51,7 +51,6 @@ run "bundle install"
 
 # Initialize CanCan
 # ==================================================
-run "rails g cancan:ability"
 
 # Initialize Devise
 # ==================================================
@@ -69,14 +68,15 @@ run "rake db:migrate"
 # Note: This is 3.0.0
 # ==================================================
 if yes?("setup bootstrap?")
+  run "rails generate simple_form:install --bootstrap"
   run "rails generate layout:install bootstrap3"
   run "rails generate layout:devise bootstrap3"
-  run "rails generate simple_form:install --bootstrap"
  elsif yes?("setup Foundation?")
+  run "rails generate simple_form:install --foundation"
   run "rails generate layout:install foundation5"
   run "rails generate layout:devise foundation5"
-  run "rails generate simple_form:install --foundation"
 end
+run "rails g cancan:ability"
 
 
 # Ignore rails doc files, Vim/Emacs swap files, .DS_Store, and more
