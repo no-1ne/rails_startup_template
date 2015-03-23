@@ -77,6 +77,7 @@ else if yes?("setup Foundation?")
   run "rails generate layout:devise foundation5"
   run "rails generate simple_form:install --foundation"
 end
+end
 
 
 # Ignore rails doc files, Vim/Emacs swap files, .DS_Store, and more
