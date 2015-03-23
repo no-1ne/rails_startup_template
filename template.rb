@@ -74,6 +74,7 @@ run "rails generate devise:install"
 
 run "rails generate devise User"
 
+run "rake db:migrate"
 
 
 
@@ -94,7 +95,6 @@ if yes?("setup Foundation?")
   run "rails generate simple_form:install --foundation"
 end
 
-run "rake db:migrate"
 
 # Ignore rails doc files, Vim/Emacs swap files, .DS_Store, and more
 # ===================================================
