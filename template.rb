@@ -76,7 +76,6 @@ if yes?("setup bootstrap?")
   run "rails generate layout:install foundation5"
   run "rails generate layout:devise foundation5"
   run "rails generate simple_form:install --foundation"
- end
 end
 
 
