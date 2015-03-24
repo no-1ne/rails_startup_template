@@ -51,7 +51,6 @@ gem "uuidtools"
 gem_group :development do
   # Rspec for tests (https://github.com/rspec/rspec-rails)
   gem "rspec-rails"
-  gem "twitter-bootstrap-rails"
   gem "rails_layout"
   gem 'better_errors'
   gem 'web-console'
