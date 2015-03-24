@@ -38,7 +38,6 @@ case ask("Choose Front end framework Engine:", :limited_to => %w[bootstrap found
 when "bootstrap"
   # HAML templating language (http://haml.info)
   gem 'bootstrap-sass'
-  gem 'bootstrap-generators', '~> 3.3.1'
 when "foundation"
   # A lightweight templating engine (http://slim-lang.com)
   gem "foundation-rails"
@@ -101,7 +100,6 @@ if yes?("setup bootstrap?")
   run "rails generate  layout:install bootstrap3"
   run "rails generate  layout:devise bootstrap3"
   run "rails generate layout:navigation"
-  run "rails generate bootstrap:install --stylesheet-engine=scss"
  elsif yes?("setup Foundation?")
   run "rails generate  simple_form:install --foundation"
   run "rails generate  layout:install foundation5"
