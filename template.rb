@@ -100,6 +100,13 @@ if yes?("setup bootstrap?")
   run "rails generate  layout:install bootstrap3"
   run "rails generate  layout:devise bootstrap3"
   run "rails generate layout:navigation"
+  repo = 'https://raw.githubusercontent.com/surabhilabs/rails_startup_template/master/'
+  copy_from_repo 'lib/templates/scaffold/edit.html.erb', :repo => repo
+  copy_from_repo 'lib/templates/scaffold/show.html.erb', :repo => repo
+  copy_from_repo 'lib/templates/scaffold/index.html.erb', :repo => repo
+  copy_from_repo 'lib/templates/scaffold/_form.html.erb', :repo => repo
+  copy_from_repo 'lib/templates/scaffold/new.html.erb', :repo => repo
+
  elsif yes?("setup Foundation?")
   run "rails generate  simple_form:install --foundation"
   run "rails generate  layout:install foundation5"
