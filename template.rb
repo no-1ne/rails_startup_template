@@ -51,6 +51,7 @@ gem "uuidtools"
 gem_group :development do
   # Rspec for tests (https://github.com/rspec/rspec-rails)
   gem "rspec-rails"
+  gem "twitter-bootstrap-rails"
   gem "rails_layout"
   gem 'better_errors'
   gem 'web-console'
@@ -101,11 +102,11 @@ if yes?("setup bootstrap?")
   run "rails generate  layout:devise bootstrap3"
   run "rails generate layout:navigation"
   repo = 'https://raw.githubusercontent.com/surabhilabs/rails_startup_template/master/'
-  copy_from_repo 'lib/templates/scaffold/edit.html.erb', :repo => repo
-  copy_from_repo 'lib/templates/scaffold/show.html.erb', :repo => repo
-  copy_from_repo 'lib/templates/scaffold/index.html.erb', :repo => repo
-  copy_from_repo 'lib/templates/scaffold/_form.html.erb', :repo => repo
-  copy_from_repo 'lib/templates/scaffold/new.html.erb', :repo => repo
+#  copy_from_repo 'lib/templates/scaffold/edit.html.erb', :repo => repo
+#  copy_from_repo 'lib/templates/scaffold/show.html.erb', :repo => repo
+#  copy_from_repo 'lib/templates/scaffold/index.html.erb', :repo => repo
+#  copy_from_repo 'lib/templates/scaffold/_form.html.erb', :repo => repo
+#  copy_from_repo 'lib/templates/scaffold/new.html.erb', :repo => repo
 
  elsif yes?("setup Foundation?")
   run "rails generate  simple_form:install --foundation"
