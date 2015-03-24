@@ -53,7 +53,6 @@ gem_group :development do
   gem "rspec-rails"
   gem "rails_layout"
   gem 'better_errors'
-  gem 'web-console'
   gem 'awesome_print'
   gem 'byebug'
   gem 'rubocop', require: false
