@@ -26,6 +26,7 @@ end
 
 # Segment.io as an analytics solution (https://github.com/segmentio/analytics-ruby)
 gem "analytics-ruby"
+
 # For encrypted password
 gem "bcrypt-ruby"
 run "sed '/sass-rails/d' Gemfile -i"
@@ -34,7 +35,7 @@ gem "cancancan"
 gem "sass-rails"
 gem "devise"
 
-case ask("Choose Front end framework Engine:", :limited_to => %w[bootstrap foundation])
+case ask("Choose Front end framework Engine:", :limited_to => %w[bootstrap foundation materialize])
 when "bootstrap"
   # HAML templating language (http://haml.info)
   gem 'bootstrap-sass'
@@ -42,16 +43,22 @@ when "foundation"
   # A lightweight templating engine (http://slim-lang.com)
   gem "foundation-rails"
 end
-
-# Simple form builder (https://github.com/plataformatec/simple_form)
-gem "simple_form", git: "https://github.com/plataformatec/simple_form"
+when "materialze"
+  # A lightweight templating engine (http://slim-lang.com)
+  gem 'materialize-sass'
+end
 # To generate UUIDs, useful for various things
 gem "uuidtools"
+gem 'jquery-turbolinks'
+gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
+
+inject_into_file 'app/assets/javascripts/application.js', "//= require jquery.turbolinks", :after => "//= require jquery"
+
 
 gem_group :development do
   # Rspec for tests (https://github.com/rspec/rspec-rails)
   gem "rspec-rails"
-  gem "rails_layout"
+  gem 'web-console', '~> 2.0'
   gem 'better_errors'
   gem 'awesome_print'
   gem 'byebug'
@@ -74,7 +81,9 @@ TEXT
 inject_into_file 'config/environments/development.rb', dev_email_text, :after => "config.assets.debug = true"
 
 run "bundle install"
-
+run "rails g client_side_validations:install"
+run "rails g client_side_validations:copy_assets"
+inject_into_file 'app/assets/javascripts/application.js', "//= require rails.validations", :before => "//= require turbolinks"
 
 # Initialize CanCan
 # ==================================================
@@ -99,18 +108,17 @@ if yes?("setup bootstrap?")
   run "rails generate  layout:install bootstrap3"
   run "rails generate  layout:devise bootstrap3"
   run "rails generate layout:navigation"
-  repo = 'https://raw.githubusercontent.com/surabhilabs/rails_startup_template/master/'
-#  copy_from_repo 'lib/templates/scaffold/edit.html.erb', :repo => repo
-#  copy_from_repo 'lib/templates/scaffold/show.html.erb', :repo => repo
-#  copy_from_repo 'lib/templates/scaffold/index.html.erb', :repo => repo
-#  copy_from_repo 'lib/templates/scaffold/_form.html.erb', :repo => repo
-#  copy_from_repo 'lib/templates/scaffold/new.html.erb', :repo => repo
 
  elsif yes?("setup Foundation?")
   run "rails generate  simple_form:install --foundation"
   run "rails generate  layout:install foundation5"
   run "rails generate  layout:devise foundation5"
   run "rails generate layout:navigation"
+  
+  elsif yes?("setup materialize?")
+  #run "mv app/assets/stylesheets/application.css app/assets/stylesheets/application.css.scss"
+  inject_into_file 'app/assets/stylesheets/application.css.scss', "@import \"materialize\";\n", :after => "*/"
+  inject_into_file 'app/assets/javascripts/application.js', " //= require materialize-sprockets", :before => "//= require turbolinks"
 end
 run "rails g cancan:ability"
 
