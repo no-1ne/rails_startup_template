@@ -115,7 +115,7 @@ if yes?("setup bootstrap?")
   run "rails generate layout:navigation"
   
   elsif yes?("setup materialize?")
-  #run "mv app/assets/stylesheets/application.css app/assets/stylesheets/application.css.scss"
+  run "mv app/assets/stylesheets/application.css app/assets/stylesheets/application.css.scss"
   inject_into_file 'app/assets/stylesheets/application.css.scss', "@import \"materialize\";\n", :after => "*/"
   inject_into_file 'app/assets/javascripts/application.js', " //= require materialize-sprockets", :before => "//= require turbolinks"
 end
