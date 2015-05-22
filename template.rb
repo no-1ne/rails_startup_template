@@ -116,8 +116,8 @@ if yes?("setup bootstrap?")
   
   elsif yes?("setup materialize?")
   run "mv app/assets/stylesheets/application.css app/assets/stylesheets/application.css.scss"
-  inject_into_file 'app/assets/stylesheets/application.css.scss', "@import \"materialize\";\n", :after => "*/"
-  inject_into_file 'app/assets/javascripts/application.js', " //= require materialize-sprockets", :before => "//= require turbolinks"
+  inject_into_file 'app/assets/stylesheets/application.css.scss', "@import \"materialize\";\n", :after => "*/\n"
+  inject_into_file 'app/assets/javascripts/application.js', " //= require materialize-sprockets\n", :before => "//= require turbolinks\n"
 end
 run "rails g cancan:ability"
 
