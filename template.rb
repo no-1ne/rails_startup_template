@@ -51,7 +51,7 @@ gem "uuidtools"
 gem 'jquery-turbolinks'
 gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
 
-inject_into_file 'app/assets/javascripts/application.js', "//= require jquery.turbolinks", :after => "//= require jquery"
+inject_into_file 'app/assets/javascripts/application.js', "//= require jquery.turbolinks\n", :after => "//= require jquery\n"
 
 
 gem_group :development do
@@ -77,12 +77,12 @@ end
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 TEXT
 
-inject_into_file 'config/environments/development.rb', dev_email_text, :after => "config.assets.debug = true"
+inject_into_file 'config/environments/development.rb', dev_email_text, :after => "config.assets.debug = true\n"
 
 run "bundle install"
 run "rails g client_side_validations:install"
 run "rails g client_side_validations:copy_assets"
-inject_into_file 'app/assets/javascripts/application.js', "//= require rails.validations", :before => "//= require turbolinks"
+inject_into_file 'app/assets/javascripts/application.js', "//= require rails.validations\n", :before => "//= require turbolinks\n"
 
 # Initialize CanCan
 # ==================================================
