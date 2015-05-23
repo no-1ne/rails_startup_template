@@ -90,7 +90,7 @@ inject_into_file 'app/assets/javascripts/application.js', "//= require rails.val
 # Initialize Devise
 # ==================================================
 run "rails generate devise:install"
-
+run "rails g devise:views"
 run "rails generate devise User"
 run "rake db:migrate"
 
