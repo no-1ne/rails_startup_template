@@ -42,7 +42,7 @@ when "bootstrap"
 when "foundation"
   # A lightweight templating engine (http://slim-lang.com)
   gem "foundation-rails"
-when "materialze"
+when "materialize"
   # A lightweight templating engine (http://slim-lang.com)
   gem 'materialize-sass'
 end
