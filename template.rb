@@ -92,7 +92,6 @@ inject_into_file 'app/assets/javascripts/application.js', "//= require rails.val
 run "rails generate devise:install"
 
 run "rails generate devise User"
-inject_into_file 'config/routes.rb', "  root to: 'visitors#new'\n", :after => "routes.draw do\n"
 run "rake db:migrate"
 
 
@@ -120,7 +119,8 @@ if yes?("setup bootstrap?")
   inject_into_file 'app/assets/javascripts/application.js', "//= require materialize-sprockets\n", :before => "//= require turbolinks\n"
 end
 run "rails g cancan:ability"
-
+run "wget https://raw.githubusercontent.com/DavyJonesLocker/client_side_validations-turbolinks/master/coffeescript/rails.validations.turbolinks.coffee"
+run "mv rails.validations.turbolinks.coffee app/assets/javascripts/"
 # Setting up foreman to deal with environment variables and services
 # https://github.com/ddollar/foreman
 # ==================================================
