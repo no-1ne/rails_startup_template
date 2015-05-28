@@ -119,7 +119,7 @@ if yes?("setup bootstrap?")
   inject_into_file 'app/assets/javascripts/application.js', "//= require materialize-sprockets\n", :after => "//= require turbolinks\n"
 end
 run "rails g cancan:ability"
-run "wget https://raw.githubusercontent.com/DavyJonesLocker/client_side_validations-turbolinks/master/coffeescript/rails.validations.turbolinks.coffee"
+#run "wget https://raw.githubusercontent.com/DavyJonesLocker/client_side_validations-turbolinks/master/coffeescript/rails.validations.turbolinks.coffee"
 run "mv rails.validations.turbolinks.coffee app/assets/javascripts/"
 # Setting up foreman to deal with environment variables and services
 # https://github.com/ddollar/foreman
