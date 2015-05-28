@@ -82,7 +82,7 @@ inject_into_file 'config/environments/development.rb', dev_email_text, :after =>
 run "bundle install"
 run "rails g client_side_validations:install"
 run "rails g client_side_validations:copy_assets"
-inject_into_file 'app/assets/javascripts/application.js', "//= require rails.validations\n", :before => "//= require turbolinks\n"
+inject_into_file 'app/assets/javascripts/application.js', "//= require rails.validations\n", :after => "//= require turbolinks\n"
 
 # Initialize CanCan
 # ==================================================
@@ -116,7 +116,7 @@ if yes?("setup bootstrap?")
   elsif yes?("setup materialize?")
   run "mv app/assets/stylesheets/application.css app/assets/stylesheets/application.css.scss"
   inject_into_file 'app/assets/stylesheets/application.css.scss', "@import \"materialize\";\n", :after => "*/\n"
-  inject_into_file 'app/assets/javascripts/application.js', "//= require materialize-sprockets\n", :before => "//= require turbolinks\n"
+  inject_into_file 'app/assets/javascripts/application.js', "//= require materialize-sprockets\n", :after => "//= require turbolinks\n"
 end
 run "rails g cancan:ability"
 run "wget https://raw.githubusercontent.com/DavyJonesLocker/client_side_validations-turbolinks/master/coffeescript/rails.validations.turbolinks.coffee"
