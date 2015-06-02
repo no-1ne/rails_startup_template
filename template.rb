@@ -34,11 +34,17 @@ run "sed '/sass-rails/d' Gemfile -i"
 gem "cancancan"
 gem "sass-rails"
 gem "devise"
+gem "parsley-rails"
 
 case ask("Choose Front end framework Engine:", :limited_to => %w[bootstrap foundation materialize])
 when "bootstrap"
   # HAML templating language (http://haml.info)
   gem 'bootstrap-sass'
+  gem 'simple_form'
+  case ask("set up materialize on bootstrap:", :limited_to => %w[yes no])
+    when "yes"
+      gem 'rails-assets-bootstrap-material-design', :source=> 'https://rails-assets.org'
+  end
 when "foundation"
   # A lightweight templating engine (http://slim-lang.com)
   gem "foundation-rails"
@@ -49,14 +55,19 @@ end
 # To generate UUIDs, useful for various things
 gem "uuidtools"
 gem 'jquery-turbolinks'
-gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations'
-
+gem "cocoon"
+gem 'underscore-rails'
+gem 'dependent-fields-rails'
 inject_into_file 'app/assets/javascripts/application.js', "//= require jquery.turbolinks\n", :after => "//= require jquery\n"
-
-
+inject_into_file 'app/assets/javascripts/application.js', "//= require cocoon\n", :after => "//= require jquery.turbolinks\n"
+inject_into_file 'app/assets/javascripts/application.js', "//= require underscore\n", :after => "//= require cocoon\n"
+inject_into_file 'app/assets/javascripts/application.js', "//= require dependent-fields\n", :after => "//= require underscore\n"
+inject_into_file 'app/assets/javascripts/application.js', "//= require parsley\n", :after => "//= require dependent-fields\n"
+ inject_into_file 'app/assets/stylesheets/application.css.scss',  "@import \"parsley\";\n", :after =>  "@import \"bootstrap\";\n"
 gem_group :development do
   # Rspec for tests (https://github.com/rspec/rspec-rails)
   gem "rspec-rails"
+   gem 'rails_layout'
   gem 'web-console', '~> 2.0'
   gem 'better_errors'
   gem 'awesome_print'
@@ -80,9 +91,7 @@ TEXT
 inject_into_file 'config/environments/development.rb', dev_email_text, :after => "config.assets.debug = true\n"
 
 run "bundle install"
-run "rails g client_side_validations:install"
-run "rails g client_side_validations:copy_assets"
-inject_into_file 'app/assets/javascripts/application.js', "//= require rails.validations\n", :after => "//= require turbolinks\n"
+
 
 # Initialize CanCan
 # ==================================================
@@ -93,7 +102,7 @@ run "rails generate devise:install"
 run "rails g devise:views"
 run "rails generate devise User"
 run "rake db:migrate"
-
+inject_into_file 'config/routes.rb', "  root to: 'welcome#index'\n", :after => "routes.draw do\n"
 
 
 copy_from_repo '.rubocop.yml'
@@ -102,10 +111,15 @@ copy_from_repo '.rubocop.yml'
 # Note: This is 3.0.0
 # ==================================================
 if yes?("setup bootstrap?")
-  run "rails generate  simple_form:install --bootstrap"
   run "rails generate  layout:install bootstrap3"
   run "rails generate  layout:devise bootstrap3"
   run "rails generate layout:navigation"
+  run "rails generate simple_form:install --bootstrap"
+  if yes?("setup bootstrap-materialize?")
+   inject_into_file 'app/assets/javascripts/application.js', "//= require bootstrap-material-design\n", :after => "//= require bootstrap-sprockets\n"
+     inject_into_file 'app/assets/stylesheets/application.css.scss',  "@import \"bootstrap-material-design\";\n", :after =>  "@import \"bootstrap\";\n"
+  end
+  
 
  elsif yes?("setup Foundation?")
   run "rails generate  simple_form:install --foundation"
@@ -118,6 +132,8 @@ if yes?("setup bootstrap?")
   inject_into_file 'app/assets/stylesheets/application.css.scss', "@import \"materialize\";\n", :after => "*/\n"
   inject_into_file 'app/assets/javascripts/application.js', "//= require materialize-sprockets\n", :after => "//= require turbolinks\n"
 end
+
+
 run "rails g cancan:ability"
 #run "wget https://raw.githubusercontent.com/DavyJonesLocker/client_side_validations-turbolinks/master/coffeescript/rails.validations.turbolinks.coffee"
 run "mv rails.validations.turbolinks.coffee app/assets/javascripts/"
