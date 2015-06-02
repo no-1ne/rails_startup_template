@@ -112,7 +112,7 @@ if yes?("setup bootstrap?")
   run "rails generate simple_form:install --bootstrap"
   if yes?("setup bootstrap-materialize?")
    inject_into_file 'app/assets/javascripts/application.js', "//= require bootstrap-material-design\n", :after => "//= require bootstrap-sprockets\n"
-     inject_into_file 'app/assets/stylesheets/application.css.scss',  "@import \"bootstrap-material-design\";\n", :after =>  "@import \"bootstrap\";\n"
+     inject_into_file 'app/assets/stylesheets/application.css.scss',  "@import \"bootstrap-material-design\";\n", :after =>  "*/\n"
   end
   
 
