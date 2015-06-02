@@ -58,12 +58,7 @@ gem 'jquery-turbolinks'
 gem "cocoon"
 gem 'underscore-rails'
 gem 'dependent-fields-rails'
-inject_into_file 'app/assets/javascripts/application.js', "//= require jquery.turbolinks\n", :after => "//= require jquery\n"
-inject_into_file 'app/assets/javascripts/application.js', "//= require cocoon\n", :after => "//= require jquery.turbolinks\n"
-inject_into_file 'app/assets/javascripts/application.js', "//= require underscore\n", :after => "//= require cocoon\n"
-inject_into_file 'app/assets/javascripts/application.js', "//= require dependent-fields\n", :after => "//= require underscore\n"
-inject_into_file 'app/assets/javascripts/application.js', "//= require parsley\n", :after => "//= require dependent-fields\n"
- inject_into_file 'app/assets/stylesheets/application.css.scss',  "@import \"parsley\";\n", :after =>  "@import \"bootstrap\";\n"
+
 gem_group :development do
   # Rspec for tests (https://github.com/rspec/rspec-rails)
   gem "rspec-rails"
@@ -133,7 +128,14 @@ if yes?("setup bootstrap?")
   inject_into_file 'app/assets/javascripts/application.js', "//= require materialize-sprockets\n", :after => "//= require turbolinks\n"
 end
 
-
+inject_into_file 'app/assets/javascripts/application.js', "//= require jquery.turbolinks\n", :after => "//= require jquery\n"
+inject_into_file 'app/assets/javascripts/application.js', "//= require cocoon\n", :after => "//= require jquery.turbolinks\n"
+inject_into_file 'app/assets/javascripts/application.js', "//= require underscore\n", :after => "//= require cocoon\n"
+inject_into_file 'app/assets/javascripts/application.js', "//= require dependent-fields\n", :after => "//= require underscore\n"
+inject_into_file 'app/assets/javascripts/application.js', "//= require parsley\n", :after => "//= require dependent-fields\n"
+ inject_into_file 'app/assets/stylesheets/application.css.scss',  "@import \"parsley\";\n", :after =>  "@import \"bootstrap\";\n"
+ 
+ 
 run "rails g cancan:ability"
 #run "wget https://raw.githubusercontent.com/DavyJonesLocker/client_side_validations-turbolinks/master/coffeescript/rails.validations.turbolinks.coffee"
 run "mv rails.validations.turbolinks.coffee app/assets/javascripts/"
