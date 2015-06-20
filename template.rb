@@ -34,9 +34,9 @@ run "sed '/sass-rails/d' Gemfile -i"
 gem "cancancan"
 gem "sass-rails"
 gem "devise"
-gem "parsley-rails"
+gem 'rails-assets-parsleyjs', :source=> 'https://rails-assets.org'
 
-case ask("Choose Front end framework Engine:", :limited_to => %w[bootstrap foundation materialize])
+case ask("Choose Front end framework Engine:", :limited_to => %w[bootstrap foundation])
 when "bootstrap"
   # HAML templating language (http://haml.info)
   gem 'bootstrap-sass'
@@ -122,19 +122,19 @@ if yes?("setup bootstrap?")
   run "rails generate  layout:devise foundation5"
   run "rails generate layout:navigation"
   
-  elsif yes?("setup materialize?")
-  run "mv app/assets/stylesheets/application.css app/assets/stylesheets/application.css.scss"
-  inject_into_file 'app/assets/stylesheets/application.css.scss', "@import \"materialize\";\n", :after => "*/\n"
-  inject_into_file 'app/assets/javascripts/application.js', "//= require materialize-sprockets\n", :after => "//= require turbolinks\n"
+#  elsif yes?("setup materialize?")
+#  run "mv app/assets/stylesheets/application.css app/assets/stylesheets/application.css.scss"
+#  inject_into_file 'app/assets/stylesheets/application.css.scss', "@import \"materialize\";\n", :after => "*/\n"
+#  inject_into_file 'app/assets/javascripts/application.js', "//= require materialize-sprockets\n", :after => "//= require turbolinks\n"
 end
 
 inject_into_file 'app/assets/javascripts/application.js', "//= require jquery.turbolinks\n", :after => "//= require jquery\n"
 inject_into_file 'app/assets/javascripts/application.js', "//= require cocoon\n", :after => "//= require jquery.turbolinks\n"
 inject_into_file 'app/assets/javascripts/application.js', "//= require underscore\n", :after => "//= require cocoon\n"
 inject_into_file 'app/assets/javascripts/application.js', "//= require dependent-fields\n", :after => "//= require underscore\n"
-inject_into_file 'app/assets/javascripts/application.js', "//= require parsley\n", :after => "//= require dependent-fields\n"
- inject_into_file 'app/assets/stylesheets/application.css.scss',  "@import \"parsley\";\n", :after =>  "@import \"bootstrap\";\n"
- 
+inject_into_file 'app/assets/javascripts/application.js', "//= require parsleyjs\n", :after => "//= require dependent-fields\n"
+run "wget https://gist.githubusercontent.com/surabhilabs/f2fbbd655702349d5dc5/raw/b49477b314107c524d756e4c291ff077778c012b/parsley-bootstrap--default-config.js" 
+run "mv parsley-bootstrap--default-config.js app/assets/javascripts/"
  
 run "rails g cancan:ability"
 #run "wget https://raw.githubusercontent.com/DavyJonesLocker/client_side_validations-turbolinks/master/coffeescript/rails.validations.turbolinks.coffee"
